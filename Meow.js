@@ -78,9 +78,9 @@ class Numb {
             throw new Error("Gambare gambare")
         }
         if (num.exponent != 0) {
-            this.exponent = this.exponent * Math.pow(10, num.exponent)
+            this.exponent = this.exponent * Math.pow(10, num.exponent) // 1e3^1e1 = 1e3*10=1e30
         } else {
-            this.exponent = this.exponent * num.mantissa
+            this.exponent = this.exponent * num.mantissa // 1e3^2=1e6
         }
     }
     log(b) {
