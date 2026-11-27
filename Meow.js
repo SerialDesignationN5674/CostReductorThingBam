@@ -1,11 +1,94 @@
 class Numb {
-  constructor(m,e){ // mantissa exponent
-    this.mantissa = m;
-    this.exponent = e;
-  }
-  add(num){
-    if(!num instanceof Numb){ // is it real or not
-      throw new Error("Gambare gambare")
+    constructor(m, e) { // mantissa exponent
+        this.mantissa = m;
+        this.exponent = e;
     }
-  }
+    clone() {
+        const clonea = new Numb(this.mantissa, this.exponent);
+        return clonea;
+    }
+    loghelper(b) {
+        let times = 0;
+        let left = this.exponent;
+    }
+    refine() {
+        if (this.mantissa >= 10) {
+            for (let i = 0; this.mantissa >= 10; i++) {
+                this.mantissa = this.mantissa / 10;
+                this.exponent = this.exponent + 1;
+            }
+        }
+    }
+    add(num) {
+        if (!num instanceof Numb) { // is it real or not
+            throw new Error("Gambare gambare")
+        }
+        if (num.mantissa && num.exponent) {
+            const difference = this.exponent - num.exponent;
+            if (difference <= 0) {
+                if (difference < -3) {
+                    this.mantissa = num.mantissa;
+                    this.exponent = num.exponent;
+                }
+                this.mantissa = this.mantissa + num.mantissa/Math.pow(10,difference)
+            }
+            if (difference > 0) {
+                if (difference > 3) {
+                    return false
+                }
+                this.mantissa = this.mantissa + num.mantissa / Math.pow(10, difference)
+            }
+        }
+    }
+    sub(num) {
+        if (!num instanceof Numb) { // is it real or not
+            throw new Error("Gambare gambare")
+        }
+        if (num.mantissa && num.exponent) {
+            const difference = this.exponent - num.exponent;
+            if (difference <= 0) {
+                if (difference < -3) {
+                    this.mantissa = num.mantissa;
+                    this.exponent = num.exponent;
+                }
+                this.mantissa = this.mantissa - num.mantissa / Math.pow(10, difference)
+            }
+            if (difference > 0) {
+                if (difference > 3) {
+                    return false
+                }
+                this.mantissa = this.mantissa - num.mantissa / Math.pow(10, difference)
+            }
+        }
+    }
+    mul(num) {
+        if (!num instanceof Numb) { // is it real or not
+            throw new Error("Gambare gambare")
+        }
+        this.exponent = this.exponent + num.exponent
+    }
+    div(num) {
+        if (!num instanceof Numb) { // is it real or not
+            throw new Error("Gambare gambare")
+        }
+        this.exponent = this.exponent - num.exponent
+    }
+    pow(num) {
+        if(!num instanceof Numb) { // is it real or not
+            throw new Error("Gambare gambare")
+        }
+        if (num.exponent != 0) {
+            this.exponent = this.exponent * Math.pow(10, num.exponent)
+        } else {
+            this.exponent = this.exponent * num.mantissa
+        }
+    }
+    log(b) {
+        if (b == 10) {
+            this.mantissa = this.exponent;
+            this.exponent = 0;
+            this.refine()
+        }
+
+    }
 }
