@@ -88,6 +88,22 @@ class Numb {
             this.mantissa = this.exponent;
             this.exponent = 0;
             this.refine()
+        } else { // heavy approximation because im Stupid(TM)
+            if (b == 2) {
+                this.mantissa = this.exponent * 3.32;
+                this.exponent = 0;
+                this.refine();
+            }
+            if (b == 3) {
+                this.mantissa = this.exponent * 2.06;
+                this.exponent = 0;
+                this.refine();
+            }
+            if (b == 4) {
+                this.mantissa = this.exponent * 1.65;
+                this.exponent = 0;
+                this.refine();
+            }
         }
 
     }
