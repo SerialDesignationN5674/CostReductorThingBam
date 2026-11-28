@@ -7,10 +7,6 @@ class Numb {
         const clonea = new Numb(this.mantissa, this.exponent);
         return clonea;
     }
-    loghelper(b) {
-        let times = 0;
-        let left = this.exponent;
-    }
     refine() {
         if (this.mantissa >= 10) {
             for (let i = 0; this.mantissa >= 10; i++) {
